@@ -17,7 +17,7 @@ const CharacterCard = () => {
         </div>
         <div className="character-card__content-section">
           <div className="character-card__status">
-            <span className="character-card__status-icon" />
+            <span className="character-card__status-icon dead" />
             Alive -- Alien
           </div>
         </div>
