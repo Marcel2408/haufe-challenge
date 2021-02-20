@@ -16,16 +16,13 @@ body {
   font-size: 1.6rem;
 }
 
+.section {
+  padding: 5rem 0;
+}
+
 .container {
-  width: 90%;
+  width: 95%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.flex {
-  display: flex;
-}
-
-.logo {
-  fill: #000;
-}
