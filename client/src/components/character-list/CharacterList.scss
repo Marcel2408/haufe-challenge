@@ -1,0 +1,14 @@
+.character-list {
+  min-height: 100vh;
+  list-style: none;
+  border: 1px red solid;
+
+  display: flex;
+  flex-flow: row wrap;
+
+  &__item {
+    padding: 1rem;
+    flex: 1 0 50%;
+    max-width: 50%;
+  }
+}
