@@ -1,10 +1,13 @@
 import React from 'react';
+import CharacterList from '../character-list/CharacterList';
+import Header from '../header/Header';
 import './App.scss';
 
 function App() {
   return (
     <div className="App">
-      <header className="container">Header</header>
+      <Header />
+      <CharacterList />
     </div>
   );
 }
