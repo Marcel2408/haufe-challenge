@@ -1,16 +1,12 @@
-const user = require('../../models/user');
+const User = require('../../models/user');
+const catchAsync = require('../../utils/catchAsync');
 
-exports.createUser = async (req, res) => {
-  try {
-    const postedUser = await user.create(req.body);
-    res.status(201).json({
-      status: 'success',
-      data: {
-        user: postedUser,
-      },
-    });
-  } catch (error) {
-    console.log('error at user controller', error);
-    res.sendStatus(500);
-  }
-};
+exports.createUser = catchAsync(async (req, res, next) => {
+  const postedUser = await User.create(req.body);
+  res.status(201).json({
+    status: 'success',
+    data: {
+      user: postedUser,
+    },
+  });
+});

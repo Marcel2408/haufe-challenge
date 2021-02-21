@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
-const database = process.env.DATABASE;
+const DB = process.env.DATABASE;
 
-mongoose.connect(database, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(DB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 module.exports = mongoose;

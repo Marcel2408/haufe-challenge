@@ -34,3 +34,8 @@ const userSchema = new Schema({
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
+// todo create authController.js
+// todo create a singup fn with req, res, next
+// todo create anew user with req.body and return the newUser
+// todo catchAsync the signup fn
