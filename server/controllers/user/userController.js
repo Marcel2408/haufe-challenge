@@ -1,12 +1,20 @@
 const User = require('../../models/user');
 const catchAsync = require('../../utils/catchAsync');
 
-exports.createUser = catchAsync(async (req, res, next) => {
-  const postedUser = await User.create(req.body);
-  res.status(201).json({
+exports.updateFavs = catchAsync(async (req, res, next) => {
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    { favourites: req.body.favourites },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  res.status(200).json({
     status: 'success',
     data: {
-      user: postedUser,
+      user: updatedUser,
     },
   });
 });

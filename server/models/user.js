@@ -20,6 +20,7 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'Please specify your password!'],
     minlength: 8,
+    select: false, // not to show password when finding users from db
   },
   passwordConfirm: {
     type: String,
@@ -32,7 +33,10 @@ const userSchema = new Schema({
       message: 'Passwords are not the same',
     },
   },
-  favourites: [String],
+  favourites: {
+    type: [Number],
+    default: [],
+  },
 });
 
 userSchema.pre('save', async function (next) {
@@ -42,6 +46,13 @@ userSchema.pre('save', async function (next) {
   this.passwordConfirm = undefined; // deletes this field before saving into DB
   next();
 });
+
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 const User = mongoose.model('User', userSchema);
 
