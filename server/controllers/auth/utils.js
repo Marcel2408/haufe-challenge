@@ -7,7 +7,7 @@ const signToken = (id) =>
 
 exports.createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
-  const cookieTimeToExpire = process.env.JWT_COOKIE_EXPIRES_IN;
+  const cookieTimeToExpire = process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 1000;
   const cookieOptions = {
     expires: new Date(Date.now() + cookieTimeToExpire),
     httpOnly: true,

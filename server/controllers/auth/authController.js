@@ -13,6 +13,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     password,
     passwordConfirm,
   });
+  console.log(newUser);
   createSendToken(newUser, 201, res);
 });
 
