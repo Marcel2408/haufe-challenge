@@ -1,15 +1,15 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import CharacterList from '../character-list/CharacterList';
 import Header from '../header/Header';
 import './App.scss';
 
-function App() {
+const App = ({ children }) => {
   return (
     <div className="App">
       <Header />
-      <CharacterList />
+      {children}
     </div>
   );
-}
+};
 
 export default App;

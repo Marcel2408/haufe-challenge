@@ -28,6 +28,12 @@ module.exports = {
     'prettier/prettier': 'warn',
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx'] }],
     'import/extensions': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        controlComponents: ['Field'],
+      },
+    ],
   },
   settings: {
     react: {

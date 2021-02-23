@@ -1,4 +1,4 @@
-import { AUTH_ERROR, AUTH_USER } from '../actions/types';
+import { AUTH_ERROR, AUTH_USER } from './auth.types';
 
 const INITIAL_STATE = {
   authenticated: '',
