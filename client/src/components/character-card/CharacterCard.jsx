@@ -1,10 +1,13 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import './CharacterCard.scss';
+import { ReactComponent as MylistIcon } from '../../assets/svg/mylist.svg';
 
 const CharacterCard = ({ name, status, species, image, location, origin }) => {
   return (
     <article className="character-card">
+      <MylistIcon />
       <div className="character-card__img-wrapper">
         <img className="character-card__img" src={image} alt="Ma-Sha" />
       </div>
@@ -14,7 +17,11 @@ const CharacterCard = ({ name, status, species, image, location, origin }) => {
         </div>
         <div className="character-card__content-section">
           <div className="character-card__status">
-            <span className="character-card__status-icon dead" />
+            <span
+              className={`character-card__status-icon ${
+                status === 'Alive' ? 'alive' : status === 'Dead' ? 'dead' : status
+              }`}
+            />
             {status} -- {species}
           </div>
         </div>

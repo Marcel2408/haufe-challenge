@@ -21,16 +21,16 @@ const CharacterList = ({ auth, characters, isPending, onRequestCharacters }) => 
           <ul className="character-list">
             {characters &&
               characters.slice(0, 10).map(({ id, ...otherCharacterProps }) => (
-                <li className="character-list__item">
-                  <CharacterCard key={id} {...otherCharacterProps} />
+                <li key={id} className="character-list__item">
+                  <CharacterCard {...otherCharacterProps} />
                 </li>
               ))}
           </ul>
           <ul className="character-list">
             {characters &&
               characters.slice(10).map(({ id, ...otherCharacterProps }) => (
-                <li className="character-list__item">
-                  <CharacterCard key={id} {...otherCharacterProps} />
+                <li key={id} className="character-list__item">
+                  <CharacterCard {...otherCharacterProps} />
                 </li>
               ))}
           </ul>

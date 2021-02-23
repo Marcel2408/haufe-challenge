@@ -3,14 +3,40 @@
 .character-card {
   min-width: 50rem;
   height: 22rem;
-  margin-right: 2rem;
+  margin: 1.3rem;
   border-radius: 10px;
   overflow: hidden;
   background-color: $color-background;
   color: $color-text-light;
   box-shadow: rgb(0, 0, 0 / 10%) 0px 4px 6px -1px, rgb(0, 0, 0 / 6%) 0px 2px 4px -1px;
+  position: relative;
+  transition: transform ease .5s;
 
   display: flex;
+
+  &:hover {
+    transform: scale(1.05);
+
+    .icon {
+      display: inline;
+    }
+  }
+
+  .icon {
+    fill: #d9d9d9;
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    border-radius: 100px;
+    display: none;
+    transition: display ease-in 1s;
+
+
+    &:hover {
+      cursor: pointer;
+      fill: #c7ab0e;
+    }
+  }
 
   &__img-wrapper {
     width: 40%;
@@ -52,4 +78,8 @@
 
 .dead {
   background: $color-status-red;
+}
+
+.unknown {
+  background: $color-status-orange;
 }
