@@ -1,26 +1,57 @@
-import React from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/prop-types */
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import requestCharacters from '../../redux/character/character.actions';
 import CharacterCard from '../character-card/CharacterCard';
+import requireAuth from '../HOC/requireAuth';
 import './CharacterList.scss';
 
-const CharacterList = () => {
+const CharacterList = ({ auth, characters, isPending, onRequestCharacters }) => {
+  useEffect(() => {
+    onRequestCharacters(auth);
+  }, []);
+
   return (
     <main className="section container">
-      <ul className="character-list">
-        <li className="character-list__item">
-          <CharacterCard />
-        </li>
-        <li className="character-list__item">
-          <CharacterCard />
-        </li>
-        <li className="character-list__item">
-          <CharacterCard />
-        </li>
-        <li className="character-list__item">
-          <CharacterCard />
-        </li>
-      </ul>
+      {isPending ? (
+        <h1>Loading</h1>
+      ) : (
+        <>
+          <ul className="character-list">
+            {characters &&
+              characters.slice(0, 10).map(({ id, ...otherCharacterProps }) => (
+                <li className="character-list__item">
+                  <CharacterCard key={id} {...otherCharacterProps} />
+                </li>
+              ))}
+          </ul>
+          <ul className="character-list">
+            {characters &&
+              characters.slice(10).map(({ id, ...otherCharacterProps }) => (
+                <li className="character-list__item">
+                  <CharacterCard key={id} {...otherCharacterProps} />
+                </li>
+              ))}
+          </ul>
+        </>
+      )}
     </main>
   );
 };
 
-export default CharacterList;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth.authenticated,
+    characters: state.characters.characters,
+    isPending: state.characters.isPending,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onRequestCharacters: (auth) => dispatch(requestCharacters(auth)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(requireAuth(CharacterList));

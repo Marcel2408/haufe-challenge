@@ -6,6 +6,7 @@ const AppError = require('../../utils/error-handler/appError');
 const { createSendToken } = require('./utils');
 
 exports.signup = catchAsync(async (req, res, next) => {
+  // console.log(req.body);
   const { name, email, password, passwordConfirm } = req.body;
   const newUser = await User.create({
     name,
@@ -13,11 +14,11 @@ exports.signup = catchAsync(async (req, res, next) => {
     password,
     passwordConfirm,
   });
-  console.log(newUser);
   createSendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
+  // console.log(req.body);
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -34,11 +35,14 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
+  console.log(req.headers.authorization);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
 
   if (!token) {

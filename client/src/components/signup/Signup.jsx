@@ -33,7 +33,7 @@ const Signup = ({ handleSubmit, dispatch, history, errorMessage }) => {
         <Field name="passwordConfirm" type="password" component="input" autoComplete="none" />
       </fieldset>
       <div className="">{errorMessage}</div>
-      <button type="button">Sing Up</button>
+      <button type="submit">Sing Up</button>
     </form>
   );
 };

@@ -1,13 +1,14 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as actions from '../../redux/auth/auth.actions';
 
-const Login = (handleSubmit, dispatch, history, errorMessage) => {
+const Login = ({ handleSubmit, dispatch, history, errorMessage }) => {
   const onSubmit = (formProps) => {
     dispatch(
-      actions.signin(formProps, (path) => {
+      actions.login(formProps, (path) => {
         history.push(path);
       })
     );
@@ -24,7 +25,7 @@ const Login = (handleSubmit, dispatch, history, errorMessage) => {
         <Field name="password" type="password" component="input" autoComplete="none" />
       </fieldset>
       <div className="">{errorMessage}</div>
-      <button type="button">Login</button>
+      <button type="submit">Login</button>
     </form>
   );
 };
