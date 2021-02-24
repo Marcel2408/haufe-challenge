@@ -13,7 +13,6 @@ const requestCharacters = (auth) => async (dispatch) => {
         Authorization: `Bearer ${auth}`,
       },
     });
-    console.log(response.data);
     dispatch({ type: REQUEST_CHARACTERS_SUCCESS, payload: response.data.data.characters });
   } catch (error) {
     dispatch({ type: REQUEST_CHARACTERS_FAILED, payload: error.response.data.message });

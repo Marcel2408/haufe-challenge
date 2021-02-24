@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case AUTH_USER:
-      return { ...state, authenticated: action.payload };
+      return { ...state, authenticated: action.payload, errorMessage: '' };
     case AUTH_ERROR:
       return { ...state, errorMessage: action.payload };
     default:

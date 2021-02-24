@@ -1,10 +1,10 @@
 const User = require('../../models/user');
 const catchAsync = require('../../utils/catchAsync');
 
-exports.updateFavs = catchAsync(async (req, res, next) => {
+exports.updateMylist = catchAsync(async (req, res, next) => {
   const updatedUser = await User.findByIdAndUpdate(
     req.user.id,
-    { favourites: req.body.favourites },
+    { mylist: req.body.data.mylist },
     {
       new: true,
       runValidators: true,
@@ -18,3 +18,12 @@ exports.updateFavs = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+exports.getMylist = (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: req.user,
+    },
+  });
+};

@@ -1,13 +1,10 @@
 .character-list {
   list-style: none;
-  border: 1px red solid;
   padding-bottom: 4rem;
   overflow-y: hidden;
   overflow-x: scroll;
 
   display: flex;
-  // flex-flow: row wrap;
-  // justify-content: space-between;
 
   &::-webkit-scrollbar {
     display: none;

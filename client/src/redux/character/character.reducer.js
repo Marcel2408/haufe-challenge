@@ -15,7 +15,7 @@ const charactersReducer = (state = INITIAL_STATE_CHARACTERS, action = {}) => {
     case REQUEST_CHARACTERS_PENDING:
       return { ...state, isPending: true };
     case REQUEST_CHARACTERS_SUCCESS:
-      return { ...state, characters: action.payload, isPending: false };
+      return { ...state, characters: action.payload, isPending: false, error: '' };
     case REQUEST_CHARACTERS_FAILED:
       return { ...state, error: action.payload, isPending: false };
     default:

@@ -1,13 +1,33 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './CharacterCard.scss';
+import { connect } from 'react-redux';
 import { ReactComponent as MylistIcon } from '../../assets/svg/mylist.svg';
+import { updateMylist } from '../../redux/user/user.actions';
 
-const CharacterCard = ({ name, status, species, image, location, origin }) => {
+// todo add spinner, bg-col, my list row, style login and signup
+
+const CharacterCard = ({ character, mylist, auth, onUpdateMylist }) => {
+  const [isInMylist, setIsInMylist] = useState(false);
+  const { id, name, image, status, species, location, origin } = character;
+  const toggleClick = () => {
+    onUpdateMylist(auth, mylist, id);
+  };
+
+  useEffect(() => {
+    if (mylist && mylist.includes(id)) {
+      setIsInMylist(true);
+    } else {
+      setIsInMylist(false);
+    }
+  }, [mylist]);
+
   return (
     <article className="character-card">
-      <MylistIcon />
+      <MylistIcon style={isInMylist ? { fill: '#c7ab0e' } : null} onClick={toggleClick}>
+        <title>Mylist Icon</title>
+      </MylistIcon>
       <div className="character-card__img-wrapper">
         <img className="character-card__img" src={image} alt="Ma-Sha" />
       </div>
@@ -38,4 +58,17 @@ const CharacterCard = ({ name, status, species, image, location, origin }) => {
   );
 };
 
-export default CharacterCard;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth.authenticated,
+    mylist: state.user.mylist,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onUpdateMylist: (auth, mylist, id) => dispatch(updateMylist(auth, mylist, id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CharacterCard);

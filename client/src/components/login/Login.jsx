@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as actions from '../../redux/auth/auth.actions';
 
-const Login = ({ handleSubmit, dispatch, history, errorMessage }) => {
+const Login = ({ handleSubmit, history, errorMessage, dispatch }) => {
   const onSubmit = (formProps) => {
     dispatch(
       actions.login(formProps, (path) => {
@@ -31,7 +31,7 @@ const Login = ({ handleSubmit, dispatch, history, errorMessage }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { errorMessage: state.auth.errorMessage };
+  return { errorMessage: state.auth.errorMessage, auth: state.auth.authenticated };
 };
 
 export default compose(connect(mapStateToProps, actions), reduxForm({ form: 'signin' }))(Login);

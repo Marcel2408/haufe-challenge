@@ -7,30 +7,44 @@ import CharacterCard from '../character-card/CharacterCard';
 import requireAuth from '../HOC/requireAuth';
 import './CharacterList.scss';
 
-const CharacterList = ({ auth, characters, isPending, onRequestCharacters }) => {
+const CharacterList = ({ auth, characters, isPending, mylist, onRequestCharacters }) => {
   useEffect(() => {
-    onRequestCharacters(auth);
+    if (!characters.length) {
+      onRequestCharacters(auth);
+    }
   }, []);
 
   return (
     <main className="section container">
       {isPending ? (
-        <h1>Loading</h1>
+        <h1>Is Loading</h1>
       ) : (
         <>
+          {characters.length && mylist.length && (
+            <ul className="character-list">
+              {mylist.map((id) => {
+                const charInMylist = characters.find((char) => char.id === id);
+                return (
+                  <li key={charInMylist.id} className="character-list__item">
+                    <CharacterCard character={charInMylist} />
+                  </li>
+                );
+              })}
+            </ul>
+          )}
           <ul className="character-list">
-            {characters &&
-              characters.slice(0, 10).map(({ id, ...otherCharacterProps }) => (
-                <li key={id} className="character-list__item">
-                  <CharacterCard {...otherCharacterProps} />
+            {characters.length &&
+              characters.slice(0, 10).map((character) => (
+                <li key={character.id} className="character-list__item">
+                  <CharacterCard character={character} />
                 </li>
               ))}
           </ul>
           <ul className="character-list">
-            {characters &&
-              characters.slice(10).map(({ id, ...otherCharacterProps }) => (
-                <li key={id} className="character-list__item">
-                  <CharacterCard {...otherCharacterProps} />
+            {characters.length &&
+              characters.slice(10).map((character) => (
+                <li key={character.id} className="character-list__item">
+                  <CharacterCard character={character} />
                 </li>
               ))}
           </ul>
@@ -45,6 +59,7 @@ const mapStateToProps = (state) => {
     auth: state.auth.authenticated,
     characters: state.characters.characters,
     isPending: state.characters.isPending,
+    mylist: state.user.mylist,
   };
 };
 

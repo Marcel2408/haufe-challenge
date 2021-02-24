@@ -34,7 +34,7 @@ const userSchema = new Schema({
       message: 'Passwords are not the same!',
     },
   },
-  favourites: {
+  mylist: {
     type: [Number],
     default: [],
   },
