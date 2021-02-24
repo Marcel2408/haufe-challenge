@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -13,6 +13,12 @@ const Login = ({ handleSubmit, history, errorMessage, dispatch }) => {
       })
     );
   };
+
+  useEffect(() => {
+    if (errorMessage) {
+      dispatch(actions.deleteError());
+    }
+  }, []);
 
   return (
     <div className="signup-login">

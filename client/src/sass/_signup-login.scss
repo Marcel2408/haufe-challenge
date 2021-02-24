@@ -5,6 +5,7 @@
   padding: 3rem;
   border-radius: 5px;
   background-color: $color-white;
+  color: $color-background;
 
   &__title {
     text-align: center;
@@ -30,7 +31,7 @@
     border-radius: 5px;
 
     &:focus {
-      background-color: $color-black;
+      background-color: $color-background;
       color: $color-white;
       outline: none;
     }
@@ -42,7 +43,7 @@
     border-radius: 5px;
     display: inline-block;
     margin: 2rem auto;
-    background-color: $color-black;
+    background-color: $color-background;
     color: $color-white;
     padding: 1rem 3rem;
     text-decoration: none;

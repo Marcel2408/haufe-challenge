@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import requestCharacters from '../../redux/character/character.actions';
 import CharacterCard from '../character-card/CharacterCard';
 import requireAuth from '../HOC/requireAuth';
+import Spinner from '../spinner/Spinner';
 import './CharacterList.scss';
 
 const CharacterList = ({ auth, characters, isPending, mylist, onRequestCharacters }) => {
@@ -17,10 +18,10 @@ const CharacterList = ({ auth, characters, isPending, mylist, onRequestCharacter
   return (
     <main className="section container">
       {isPending ? (
-        <h1>Is Loading</h1>
+        <Spinner />
       ) : (
         <>
-          {characters.length && mylist.length && (
+          {characters.length && mylist.length ? (
             <ul className="character-list">
               {mylist.map((id) => {
                 const charInMylist = characters.find((char) => char.id === id);
@@ -31,10 +32,10 @@ const CharacterList = ({ auth, characters, isPending, mylist, onRequestCharacter
                 );
               })}
             </ul>
-          )}
+          ) : null}
           <ul className="character-list">
             {characters.length &&
-              characters.slice(0, 10).map((character) => (
+              characters.slice(0, characters.length / 2).map((character) => (
                 <li key={character.id} className="character-list__item">
                   <CharacterCard character={character} />
                 </li>
@@ -42,7 +43,7 @@ const CharacterList = ({ auth, characters, isPending, mylist, onRequestCharacter
           </ul>
           <ul className="character-list">
             {characters.length &&
-              characters.slice(10).map((character) => (
+              characters.slice(characters.length / 2).map((character) => (
                 <li key={character.id} className="character-list__item">
                   <CharacterCard character={character} />
                 </li>

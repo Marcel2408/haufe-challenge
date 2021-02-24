@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import { ReactComponent as MylistIcon } from '../../assets/svg/mylist.svg';
 import { updateMylist } from '../../redux/user/user.actions';
 
-// todo add spinner, bg-col, my list row, style login and signup
-
 const CharacterCard = ({ character, mylist, auth, onUpdateMylist }) => {
   const [isInMylist, setIsInMylist] = useState(false);
   const { id, name, image, status, species, location, origin } = character;

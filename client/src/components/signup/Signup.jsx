@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as actions from '../../redux/auth/auth.actions';
 import './Signup.scss';
 
-const Signup = ({ handleSubmit, dispatch, history, errorMessage }) => {
+const Signup = ({ handleSubmit, history, errorMessage, dispatch }) => {
   const onSubmit = (formProps) => {
     dispatch(
       actions.signup(formProps, (path) => {
@@ -14,6 +14,12 @@ const Signup = ({ handleSubmit, dispatch, history, errorMessage }) => {
       })
     );
   };
+
+  useEffect(() => {
+    if (errorMessage) {
+      dispatch(actions.deleteError());
+    }
+  }, []);
 
   return (
     <div className="signup-login">

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { mapUserMylist } from '../user/user.actions';
-import { AUTH_ERROR, AUTH_USER } from './auth.types';
+import { AUTH_ERROR, AUTH_USER, DELETE_ERROR } from './auth.types';
 
 export const signup = (formProps, redirect) => async (dispatch) => {
   try {
@@ -34,3 +34,7 @@ export const signout = () => {
     payload: '',
   };
 };
+
+export const deleteError = () => ({
+  type: DELETE_ERROR,
+});
