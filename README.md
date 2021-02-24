@@ -78,7 +78,7 @@ Relevant dependencies:
 Use [axios](https://www.npmjs.com/package/axios) as Http request package as it works both for the frontend and for the backend.
 
 Use [redux-thunk](https://www.npmjs.com/package/redux-thunk) as a middleware to dispatch async actions.
-Use [redux-logger](https://www.npmjs.com/package/redux-logger) as a middleware to keep track of state changes during development. 
+Use [redux-logger](https://www.npmjs.com/package/redux-logger) as a middleware to keep track of state changes during development.
 
 I decided to create a HOC 'requireAuth' to make sure that only the logged users are able to acess the list of characters.
 
@@ -107,7 +107,7 @@ Sass: More leverage on the Sass features can be developed, such as mixins for qu
 
 Router: A router index.js file can be added to gather all routes and map them depending on the controller that bothers in each case.
 
-Production environment: NODE_ENV variables can be added to create different environments for production, testing and development. 
+Production environment: NODE_ENV variables can be added to create different environments for production, testing and development.
 
 Testing: API unit and integration testing should be developed to ensure the correct interactions between db, models and controllers. Also in frontent to test API calls and correct interactions between components and Redux state.
 

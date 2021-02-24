@@ -22,7 +22,7 @@ export const login = (formProps, redirect) => async (dispatch) => {
     dispatch(mapUserMylist(response.data.data.user.mylist));
     redirect('/list');
   } catch (error) {
-    dispatch({ type: AUTH_ERROR, payload: error.response.data.message });
+    dispatch({ type: AUTH_ERROR, payload: 'Invalid email or password' });
   }
 };
 
