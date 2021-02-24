@@ -1,0 +1,27 @@
+@import '../../sass/variables';
+
+.fieldset {
+  border: none;
+
+  &__label,
+  &__input {
+    display: block;
+  }
+
+  &__label {
+    margin-top: 1rem;
+  }
+
+  &__input {
+    padding: 1rem 1.5rem;
+    font-family: inherit;
+    font-size: 1.6rem;
+    border-radius: 5px;
+
+    &:focus {
+      background-color: $color-background;
+      color: $color-white;
+      outline: none;
+    }
+  }
+}

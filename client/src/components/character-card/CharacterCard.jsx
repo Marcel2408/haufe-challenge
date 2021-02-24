@@ -2,15 +2,20 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import './CharacterCard.scss';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as MylistIcon } from '../../assets/svg/mylist.svg';
 import { updateMylist } from '../../redux/user/user.actions';
 
-const CharacterCard = ({ character, mylist, auth, onUpdateMylist }) => {
+const CharacterCard = ({ character }) => {
   const [isInMylist, setIsInMylist] = useState(false);
+  const auth = useSelector((state) => state.auth.authenticated);
+  const mylist = useSelector((state) => state.user.mylist);
   const { id, name, image, status, species, location, origin } = character;
+
+  const dispatch = useDispatch();
+
   const toggleClick = () => {
-    onUpdateMylist(auth, mylist, id);
+    dispatch(updateMylist(auth, mylist, id));
   };
 
   useEffect(() => {
@@ -56,17 +61,4 @@ const CharacterCard = ({ character, mylist, auth, onUpdateMylist }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth.authenticated,
-    mylist: state.user.mylist,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onUpdateMylist: (auth, mylist, id) => dispatch(updateMylist(auth, mylist, id)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CharacterCard);
+export default CharacterCard;

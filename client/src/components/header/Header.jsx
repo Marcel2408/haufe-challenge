@@ -2,13 +2,17 @@
 import React from 'react';
 import './Header.scss';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as LogoIcon } from '../../assets/svg/logo.svg';
 import * as actions from '../../redux/auth/auth.actions';
 
-const Header = ({ authenticated, signout }) => {
+const Header = () => {
+  const authenticated = useSelector((state) => state.auth.authenticated);
+
+  const dispatch = useDispatch();
+
   const onSignOut = () => {
-    signout();
+    dispatch(actions.signout());
   };
   const renderedLinks = () => {
     if (authenticated) {
@@ -42,10 +46,4 @@ const Header = ({ authenticated, signout }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    authenticated: state.auth.authenticated,
-  };
-};
-
-export default connect(mapStateToProps, actions)(Header);
+export default Header;

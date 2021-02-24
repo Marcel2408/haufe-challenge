@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import * as actions from '../../redux/auth/auth.actions';
+import { reduxForm } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { signup, deleteError } from '../../redux/auth/auth.actions';
 import './Signup.scss';
+import FormFieldset from '../form-fieldset/FormFieldset';
 
-const Signup = ({ handleSubmit, history, errorMessage, dispatch }) => {
+const Signup = ({ handleSubmit, history }) => {
+  const errorMessage = useSelector((state) => state.auth.errorMessage);
+  const dispatch = useDispatch();
+
   const onSubmit = (formProps) => {
     dispatch(
-      actions.signup(formProps, (path) => {
+      signup(formProps, (path) => {
         history.push(path);
       })
     );
@@ -17,70 +20,22 @@ const Signup = ({ handleSubmit, history, errorMessage, dispatch }) => {
 
   useEffect(() => {
     if (errorMessage) {
-      dispatch(actions.deleteError());
+      dispatch(deleteError());
     }
   }, []);
 
   return (
-    <div className="signup-login">
+    <div className="signup">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <h1 className="form__title">Sign Up</h1>
         <div className="form__fieldset-wrapper">
-          <fieldset>
-            <label className="form__label" htmlFor="name">
-              Name
-            </label>
-            <Field
-              className="form__input"
-              name="name"
-              type="text"
-              component="input"
-              autoComplete="none"
-              required
-            />
-          </fieldset>
-          <fieldset>
-            <label className="form__label" htmlFor="email">
-              Email
-            </label>
-            <Field
-              className="form__input"
-              name="email"
-              type="text"
-              component="input"
-              autoComplete="none"
-              required
-            />
-          </fieldset>
-          <fieldset>
-            <label className="form__label" htmlFor="password">
-              Password
-            </label>
-            <Field
-              className="form__input"
-              name="password"
-              type="password"
-              component="input"
-              autoComplete="none"
-              required
-            />
-          </fieldset>
-          <fieldset>
-            <label className="form__label" htmlFor="passwordConfirm">
-              Confirm Password
-            </label>
-            <Field
-              className="form__input"
-              name="passwordConfirm"
-              type="password"
-              component="input"
-              autoComplete="none"
-              required
-            />
-          </fieldset>
+          <FormFieldset label="Name" name="name" type="text" />
+          <FormFieldset label="Email" name="email" type="email" />
+          <FormFieldset label="Password" name="password" type="password" />
+          <FormFieldset label="Confirm Password" name="passwordConfirm" type="password" />
         </div>
         <div className="error">{errorMessage}</div>
-        <button className="form__submit" type="submit">
+        <button className="form__submit btn" type="submit">
           Sing Up
         </button>
       </form>
@@ -88,8 +43,4 @@ const Signup = ({ handleSubmit, history, errorMessage, dispatch }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { errorMessage: state.auth.errorMessage };
-};
-
-export default compose(connect(mapStateToProps, actions), reduxForm({ form: 'signup' }))(Signup);
+export default reduxForm({ form: 'signup' })(Signup);

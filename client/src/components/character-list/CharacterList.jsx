@@ -1,17 +1,23 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import requestCharacters from '../../redux/character/character.actions';
-import CharacterCard from '../character-card/CharacterCard';
-import requireAuth from '../HOC/requireAuth';
+import CharacterRow from '../character-row/CharacterRow';
+import requireAuth from '../../HOC/requireAuth';
 import Spinner from '../spinner/Spinner';
 import './CharacterList.scss';
 
-const CharacterList = ({ auth, characters, isPending, mylist, onRequestCharacters }) => {
+const CharacterList = () => {
+  const auth = useSelector((state) => state.auth.authenticated);
+  const characters = useSelector((state) => state.characters.characters);
+  const isPending = useSelector((state) => state.characters.isPending);
+  const mylist = useSelector((state) => state.user.mylist);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (!characters.length) {
-      onRequestCharacters(auth);
+      dispatch(requestCharacters(auth));
     }
   }, []);
 
@@ -22,52 +28,17 @@ const CharacterList = ({ auth, characters, isPending, mylist, onRequestCharacter
       ) : (
         <>
           {characters.length && mylist.length ? (
-            <ul className="character-list">
-              {mylist.map((id) => {
-                const charInMylist = characters.find((char) => char.id === id);
-                return (
-                  <li key={charInMylist.id} className="character-list__item">
-                    <CharacterCard character={charInMylist} />
-                  </li>
-                );
-              })}
-            </ul>
+            <CharacterRow
+              title="My List"
+              list={mylist.map((id) => characters.find((char) => char.id === id))}
+            />
           ) : null}
-          <ul className="character-list">
-            {characters.length &&
-              characters.slice(0, characters.length / 2).map((character) => (
-                <li key={character.id} className="character-list__item">
-                  <CharacterCard character={character} />
-                </li>
-              ))}
-          </ul>
-          <ul className="character-list">
-            {characters.length &&
-              characters.slice(characters.length / 2).map((character) => (
-                <li key={character.id} className="character-list__item">
-                  <CharacterCard character={character} />
-                </li>
-              ))}
-          </ul>
+          <CharacterRow title="Characters List" list={characters.slice(0, characters.length / 2)} />
+          <CharacterRow title="More Characters.." list={characters.slice(characters.length / 2)} />
         </>
       )}
     </main>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth.authenticated,
-    characters: state.characters.characters,
-    isPending: state.characters.isPending,
-    mylist: state.user.mylist,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onRequestCharacters: (auth) => dispatch(requestCharacters(auth)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(requireAuth(CharacterList));
+export default requireAuth(CharacterList);

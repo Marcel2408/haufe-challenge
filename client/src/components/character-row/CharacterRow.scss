@@ -1,0 +1,20 @@
+.character-row {
+  list-style: none;
+  padding-bottom: 4rem;
+  overflow-y: hidden;
+  overflow-x: scroll;
+
+  display: flex;
+
+  &::-webkit-scrollbar {
+    display: none;
+   }
+
+  &__item {
+    width: 48%;
+  }
+
+  &__title {
+    margin-left: 1.3rem;
+  }
+}

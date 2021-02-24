@@ -1,66 +1,42 @@
 @import './variables';
+@import './buttons';
 
-.form {
-  box-shadow: 0 1rem 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 3rem;
-  border-radius: 5px;
-  background-color: $color-white;
-  color: $color-background;
+.signup {
+  margin-top: 5rem;
+}
 
-  &__title {
-    text-align: center;
-  }
+.login {
+  margin-top: 8rem;
+}
 
-  &__fieldset-wrapper {
-    margin-top: 1.5rem;
-  }
+.signup,
+.login {
+  position: relative;
+  transform: translateX(-50%);
+  left: 50%;
+  max-width: 26rem;
 
-  &__label,
-  &__input {
-    display: block;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  &__label {
-    margin-top: 1rem;
-  }
-
-  &__input {
-    padding: 1rem 1.5rem;
-    font-family: inherit;
-    font-size: 1.6rem;
+  .form {
+    box-shadow: 0 1rem 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 3rem;
     border-radius: 5px;
+    background-color: $color-white;
+    color: $color-background;
 
-    &:focus {
-      background-color: $color-background;
-      color: $color-white;
-      outline: none;
+    &__title {
+      text-align: center;
     }
-  }
 
-  &__submit {
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    display: inline-block;
-    margin: 2rem auto;
-    background-color: $color-background;
-    color: $color-white;
-    padding: 1rem 3rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: inherit;
-    font-family: inherit;
-    font-weight: bold;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    &__fieldset-wrapper {
+      margin-top: 1.5rem;
+    }
   }
 
   .error {
     color: $color-status-red;
   }
-}
-
-fieldset {
-  border: none;
 }

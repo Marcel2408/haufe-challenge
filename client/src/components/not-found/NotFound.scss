@@ -1,0 +1,15 @@
+@import '../../sass/variables';
+@import '../../sass/buttons';
+
+.not-found {
+  position: relative;
+  transform: translateX(-50%);
+  left: 50%;
+  margin-top: 8rem;
+  max-width: 70rem;
+  box-shadow: 0 1rem 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 3rem;
+  border-radius: 5px;
+  background-color: $color-white;
+  color: $color-background;
+}
