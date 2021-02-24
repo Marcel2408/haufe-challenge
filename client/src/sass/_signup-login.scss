@@ -1,0 +1,65 @@
+@import './variables';
+
+.form {
+  box-shadow: 0 1rem 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 3rem;
+  border-radius: 5px;
+  background-color: $color-white;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__fieldset-wrapper {
+    margin-top: 1.5rem;
+  }
+
+  &__label,
+  &__input {
+    display: block;
+  }
+
+  &__label {
+    margin-top: 1rem;
+  }
+
+  &__input {
+    padding: 1rem 1.5rem;
+    font-family: inherit;
+    font-size: 1.6rem;
+    border-radius: 5px;
+
+    &:focus {
+      background-color: $color-black;
+      color: $color-white;
+      outline: none;
+    }
+  }
+
+  &__submit {
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 2rem auto;
+    background-color: $color-black;
+    color: $color-white;
+    padding: 1rem 3rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: bold;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .error {
+    color: $color-status-red;
+  }
+}
+
+fieldset {
+  border: none;
+}

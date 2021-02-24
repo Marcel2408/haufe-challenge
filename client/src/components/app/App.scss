@@ -1,9 +1,9 @@
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
 html {
@@ -16,6 +16,11 @@ body {
   font-size: 1.6rem;
 }
 
+.app {
+  min-height: 100vh;
+  position: relative;
+}
+
 .section {
   padding: 5rem 0;
 }
@@ -26,3 +31,15 @@ body {
   margin: 0 auto;
 }
 
+.signup-login {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 55%;
+  left: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@import '../../sass/signup-login';

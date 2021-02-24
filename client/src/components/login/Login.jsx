@@ -15,18 +15,43 @@ const Login = ({ handleSubmit, history, errorMessage, dispatch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <fieldset>
-        <label htmlFor="name">Email</label>
-        <Field name="email" type="text" component="input" autoComplete="none" />
-      </fieldset>
-      <fieldset>
-        <label htmlFor="name">Password</label>
-        <Field name="password" type="password" component="input" autoComplete="none" />
-      </fieldset>
-      <div className="">{errorMessage}</div>
-      <button type="submit">Login</button>
-    </form>
+    <div className="signup-login">
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <h1 className="form__title">Log in</h1>
+        <div className="form__fieldset-wrapper">
+          <fieldset>
+            <label className="form__label" htmlFor="email">
+              Email
+            </label>
+            <Field
+              className="form__input"
+              name="email"
+              type="text"
+              component="input"
+              autoComplete="none"
+              required
+            />
+          </fieldset>
+          <fieldset>
+            <label className="form__label" htmlFor="password">
+              Password
+            </label>
+            <Field
+              className="form__input"
+              name="password"
+              type="password"
+              component="input"
+              autoComplete="none"
+              required
+            />
+          </fieldset>
+        </div>
+        <div className="error">{errorMessage}</div>
+        <button className="form__submit" type="submit">
+          Log in
+        </button>
+      </form>
+    </div>
   );
 };
 
