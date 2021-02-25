@@ -80,6 +80,8 @@ Use [axios](https://www.npmjs.com/package/axios) as Http request package as it w
 Use [redux-thunk](https://www.npmjs.com/package/redux-thunk) as a middleware to dispatch async actions.
 Use [redux-logger](https://www.npmjs.com/package/redux-logger) as a middleware to keep track of state changes during development.
 
+Use [commitizen](https://www.npmjs.com/package/commitizen) to keep clean an well structured commits.
+
 I decided to create a HOC 'requireAuth' to make sure that only the logged users are able to acess the list of characters.
 
 ### Server
@@ -100,7 +102,7 @@ Relevant dependencies:
 
 Extras: I managed to complete the signup functionality and added a spinner
 
-## Possible Improvements
+## Potential Improvements (next steps)
 Responsivess: I focused on meeting the requirements, but some media queries would be needed to fit in all screen sizes. However, I used 'rem' to quickly adapt most of the properties by just changing the root font-size.
 
 Sass: More leverage on the Sass features can be developed, such as mixins for quickly adding the basic structure when declaring an element as flex container.
@@ -109,9 +111,11 @@ Router: A router index.js file can be added to gather all routes and map them de
 
 Production environment: NODE_ENV variables can be added to create different environments for production, testing and development.
 
-Testing: API unit and integration testing should be developed to ensure the correct interactions between db, models and controllers. Also in frontent to test API calls and correct interactions between components and Redux state.
-
 API file: In the frontend, a refactor to isolate the API calls would be better to avoid code repetition and separate concerns.
+
+Authentication: I use JWT tokens stored in local storage, and I've set up the server to send a cookie with the jwt token. However, since client and server operate in different servers I've gone on with tokens and authorization headers. Setting up a proxy and authenticating via cookie is more secure against cross domain attacks.
+
+Performance: Using React.lazy to wrap the different routes and divide into chunks the bundle js file in a way that only when the user clicks the code is loaded. 
 
 ## About me
 
